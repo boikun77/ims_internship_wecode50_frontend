@@ -1,0 +1,38 @@
+.nav {
+  display: flex;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid black;
+
+  .link {
+    cursor: pointer;
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 75px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 10px;
+
+    .logo {
+      width: 20%;
+    }
+
+    .headerText {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      height: 100%;
+      justify-content: center;
+
+      .propic {
+        width: 6%;
+        height: auto;
+      }
+    }
+  }
+}
