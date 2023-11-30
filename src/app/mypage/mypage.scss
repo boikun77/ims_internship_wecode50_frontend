@@ -1,0 +1,108 @@
+.mypageContainer {
+  padding: 50px;
+  background-color: #f5f6f7;
+
+  .headerText {
+    font-size: 20px;
+    font-weight: 800;
+    margin-left: 200px;
+    margin-bottom: 30px;
+  }
+
+  .mypageMain {
+    background-color: white;
+    width: 70%;
+    border: 3px solid #e8e9eb;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 25px;
+
+    .tabSelector {
+      display: flex;
+      gap: 20px;
+
+      .tabButton {
+        border: none;
+        background-color: white;
+        font-size: 17px;
+        cursor: pointer;
+      }
+    }
+
+    .userInfoWrapper {
+      border-style: dotted;
+      padding: 30px;
+      margin-top: 20px;
+
+      .userLists {
+        font-size: 18px;
+        line-height: 3;
+      }
+
+      button {
+        position: relative;
+        right: 10px;
+        width: 30%;
+        margin-top: 30px;
+        font-size: 15px;
+        border: 1px solid transparent;
+        background-color: #416cda;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 8px;
+        float: none;
+        line-height: 1.11;
+        &:hover {
+          background-color: rgb(61, 61, 228);
+          cursor: pointer;
+        }
+      }
+    }
+    .adjustInfo {
+      margin-top: 20px;
+      p {
+        color: #252628;
+        margin-top: 40px;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 22px;
+        font-family: "ProximaNova Bold", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+      }
+      input {
+        width: 50%;
+        border: 2px solid #d3d4d7;
+        border-radius: 8px;
+        padding: 17px 17px;
+        font-size: 15px;
+        line-height: 24px;
+        height: auto;
+        margin-top: 8px;
+        margin-bottom: 0;
+        box-shadow: none;
+        font-family: "ProximaNova Regular", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+        display: block;
+      }
+
+      button {
+        width: 54%;
+        margin-top: 30px;
+        font-size: 15px;
+        border: 1px solid transparent;
+        background-color: #416cda;
+        color: #fff;
+        padding: 15px 17px;
+        border-radius: 8px;
+        float: none;
+        line-height: 1.11;
+        &:hover {
+          background-color: rgb(61, 61, 228);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
