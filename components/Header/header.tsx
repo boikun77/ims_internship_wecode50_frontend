@@ -1,10 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
-import "./Header.scss";
+"use client";
+import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import "./header.scss";
 
-export default function Header() {
-  const navigate = useNavigate();
+const Header: React.FC = () => {
+  const router = useRouter();
   const isLoggedIn = !!localStorage.getItem("token");
-  const name = localStorage.getItem("nickname");
+  const name = localStorage.getItem("nickname") || "";
+
   const handleLogout = () => {
     const isLogoutConfirmed = window.confirm("로그아웃 하시겠습니까?");
 
@@ -17,59 +21,54 @@ export default function Header() {
       localStorage.removeItem("userName");
       localStorage.removeItem("profile_image");
 
-      navigate("/");
+      router.push("/");
     }
-    return (
-      <>
-        <div className="nav">
-          <div className="wrapper">
-            <div>
-              <img
-                className="logo link"
-                alt="logoimg"
-                src="/img/gitcat.png"
-                onClick={() => navigate("/")}
-              />
-            </div>
-
-            <ul className="headerText">
-              {isLoggedIn ? (
-                <>
-                  <li>
-                    <p>{name} 님</p>
-                  </li>
-                  <li>
-                    <button className="link" onClick={handleLogout}>
-                      로그아웃
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="link"
-                      onClick={() => navigate("/mypage")}
-                    >
-                      마이페이지
-                    </button>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li>
-                    <Link to="/signup">
-                      <button>회원가입</button>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/login">
-                      <button>로그인</button>
-                    </Link>
-                  </li>
-                </>
-              )}
-            </ul>
-          </div>
-        </div>
-      </>
-    );
   };
-}
+
+  return (
+    <div className="nav">
+      <div className="wrapper">
+        <div>
+          <img
+            className="logo"
+            alt="logoimg"
+            src="/img/gitcat.png"
+            onClick={() => router.push("/")}
+          />
+        </div>
+
+        <ul className="headerText">
+          {isLoggedIn ? (
+            <>
+              <li>
+                <p>{name} 님</p>
+              </li>
+              <li>
+                <button className="link" onClick={handleLogout}>
+                  로그아웃
+                </button>
+              </li>
+              <li>
+                <button className="link" onClick={() => router.push("/mypage")}>
+                  마이페이지
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <Link href="/signup">
+                <button className="signup">회원가입</button>
+              </Link>
+
+              <Link href="/login">
+                <button className="login">로그인</button>
+              </Link>
+            </>
+          )}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default Header;
