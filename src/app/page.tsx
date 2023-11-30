@@ -1,7 +1,7 @@
 import Image from "next/image";
 import "./main.scss";
 import { URL_HISTORY } from "/Users/boikun/Desktop/ims_internship_wecode50/src/app/data/index";
-import Header from "../../components/header/header";
+import Header from "../../components/Header/header";
 
 interface UrlHistoryItem {
   id: number;
