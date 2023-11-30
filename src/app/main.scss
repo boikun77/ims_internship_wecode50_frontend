@@ -1,0 +1,192 @@
+@font-face {
+  font-family: "cookie";
+  src: url("/Users/boikun/Desktop/ims_internship_wecode50/public/font/CookieRunFont_TTF/CookieRun Black.ttf")
+    format("truetype");
+}
+.container {
+  padding: 50px;
+  background-color: #f5f6f7;
+  .intro {
+    .introHeader {
+      font-size: 50px;
+      font-weight: 800;
+
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      font-family: "cookie";
+
+      .introHeaderSpan {
+        color: #2a5bd7;
+      }
+    }
+
+    .introText {
+      color: #62666e;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      line-height: 2;
+    }
+  }
+
+  .main {
+    background-color: white;
+    width: 73%;
+    border: 3px solid #e8e9eb;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 25px;
+
+    p {
+      color: #252628;
+      margin-top: 40px;
+      font-size: 27px;
+      font-weight: 500;
+      line-height: 22px;
+      font-family: "ProximaNova Bold", "Helvetica Neue", Helvetica, Arial,
+        sans-serif;
+    }
+    input {
+      border: 2px solid #d3d4d7;
+      border-radius: 8px;
+      padding: 23px 20px;
+      font-size: 20px;
+      line-height: 24px;
+      height: auto;
+      margin-top: 8px;
+      margin-bottom: 0;
+      box-shadow: none;
+      font-family: "ProximaNova Regular", "Helvetica Neue", Helvetica, Arial,
+        sans-serif;
+      display: block;
+    }
+
+    button {
+      margin-top: 20px;
+      border: 1px solid transparent;
+      background-color: #2a5bd7;
+      color: #fff;
+      padding: 22px 30px;
+      font-size: 20px;
+      border-radius: 8px;
+      float: none;
+      line-height: 1.11;
+      &:hover {
+        background-color: rgb(61, 61, 228);
+        cursor: pointer;
+      }
+    }
+    .mainResult {
+      border: 2px solid #d3d4d7;
+      border-radius: 8px;
+      padding: 23px 20px;
+      font-size: 20px;
+      line-height: 24px;
+      height: auto;
+      margin-top: 8px;
+      margin-bottom: 0;
+      box-shadow: none;
+      font-family: "ProximaNova Regular", "Helvetica Neue", Helvetica, Arial,
+        sans-serif;
+      display: block;
+      color: gray;
+    }
+    .mainFomula {
+      display: flex;
+      gap: 30px;
+      .form1 {
+        margin-left: 50px;
+        color: #2a5bd7;
+      }
+      .form2 {
+        color: gray;
+        background-color: #eef0f5;
+        width: 90%;
+        border: 1px solid #d3d4d7;
+        border-radius: 8px;
+        padding: 23px 20px;
+        font-size: 20px;
+        line-height: 30px;
+        height: auto;
+        margin-top: 8px;
+        margin-bottom: 0;
+        box-shadow: none;
+        font-family: "ProximaNova Regular", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+      }
+    }
+  }
+
+  .mainHistory {
+    background-color: white;
+    width: 73%;
+    border: 3px solid #e8e9eb;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 30px;
+    padding: 25px;
+
+    p {
+      color: #252628;
+      margin-top: 40px;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 22px;
+      font-family: "ProximaNova Bold", "Helvetica Neue", Helvetica, Arial,
+        sans-serif;
+      text-decoration: underline;
+    }
+
+    .urlLists {
+      margin-top: 20px;
+      font-size: 23px;
+      line-height: 3;
+      color: rgb(35, 35, 128);
+    }
+  }
+
+  .mainBottom {
+    margin: 30px auto;
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+
+    .mainBottomText {
+      margin-top: 35px;
+      font-size: 20px;
+      color: rgb(202, 49, 49);
+      text-decoration: underline;
+    }
+
+    .mainBottomButtons {
+      .signup {
+        border: none;
+        background-color: #f5f6f7;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .login {
+        margin-left: 20px;
+        font-size: 20px;
+        margin-top: 20px;
+        border: 1px solid transparent;
+        background-color: #2a5bd7;
+        color: #fff;
+        padding: 15px 30px;
+        font-size: 20px;
+        border-radius: 8px;
+        float: none;
+        line-height: 1.11;
+        &:hover {
+          background-color: rgb(61, 61, 228);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
