@@ -8,7 +8,7 @@
   background-color: #f5f6f7;
   .intro {
     .introHeader {
-      font-size: 50px;
+      font-size: 40px;
       font-weight: 800;
 
       display: flex;
@@ -22,6 +22,7 @@
     }
 
     .introText {
+      font-size: 20px;
       color: #62666e;
       text-align: center;
       display: flex;
@@ -32,7 +33,7 @@
 
   .main {
     background-color: white;
-    width: 73%;
+    width: 70%;
     border: 3px solid #e8e9eb;
     border-radius: 10px;
     display: flex;
@@ -43,7 +44,7 @@
     p {
       color: #252628;
       margin-top: 40px;
-      font-size: 27px;
+      font-size: 20px;
       font-weight: 500;
       line-height: 22px;
       font-family: "ProximaNova Bold", "Helvetica Neue", Helvetica, Arial,
@@ -53,7 +54,7 @@
       border: 2px solid #d3d4d7;
       border-radius: 8px;
       padding: 23px 20px;
-      font-size: 20px;
+      font-size: 15px;
       line-height: 24px;
       height: auto;
       margin-top: 8px;
@@ -70,7 +71,7 @@
       background-color: #2a5bd7;
       color: #fff;
       padding: 22px 30px;
-      font-size: 20px;
+      font-size: 15px;
       border-radius: 8px;
       float: none;
       line-height: 1.11;
@@ -83,7 +84,7 @@
       border: 2px solid #d3d4d7;
       border-radius: 8px;
       padding: 23px 20px;
-      font-size: 20px;
+      font-size: 15px;
       line-height: 24px;
       height: auto;
       margin-top: 8px;
@@ -108,7 +109,7 @@
         border: 1px solid #d3d4d7;
         border-radius: 8px;
         padding: 23px 20px;
-        font-size: 20px;
+        font-size: 15px;
         line-height: 30px;
         height: auto;
         margin-top: 8px;
@@ -122,7 +123,7 @@
 
   .mainHistory {
     background-color: white;
-    width: 73%;
+    width: 70%;
     border: 3px solid #e8e9eb;
     border-radius: 10px;
     display: flex;
@@ -134,7 +135,7 @@
     p {
       color: #252628;
       margin-top: 40px;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 500;
       line-height: 22px;
       font-family: "ProximaNova Bold", "Helvetica Neue", Helvetica, Arial,
@@ -144,7 +145,7 @@
 
     .urlLists {
       margin-top: 20px;
-      font-size: 23px;
+      font-size: 18px;
       line-height: 3;
       color: rgb(35, 35, 128);
     }
@@ -152,13 +153,13 @@
 
   .mainBottom {
     margin: 30px auto;
-    width: 75%;
+    width: 70%;
     display: flex;
     justify-content: space-between;
 
     .mainBottomText {
       margin-top: 35px;
-      font-size: 20px;
+      font-size: 17px;
       color: rgb(202, 49, 49);
       text-decoration: underline;
     }
@@ -167,18 +168,17 @@
       .signup {
         border: none;
         background-color: #f5f6f7;
-        font-size: 20px;
+        font-size: 17px;
         cursor: pointer;
       }
       .login {
         margin-left: 20px;
-        font-size: 20px;
+        font-size: 17px;
         margin-top: 20px;
         border: 1px solid transparent;
         background-color: #2a5bd7;
         color: #fff;
         padding: 15px 30px;
-        font-size: 20px;
         border-radius: 8px;
         float: none;
         line-height: 1.11;

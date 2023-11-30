@@ -1,10 +1,18 @@
 import Image from "next/image";
 import "./main.scss";
 import { URL_HISTORY } from "/Users/boikun/Desktop/ims_internship_wecode50/src/app/data/index";
+import Header from "../../components/header/header";
 
-export default function Home() {
+interface UrlHistoryItem {
+  id: number;
+  before: string;
+  after: string;
+}
+
+const Home: React.FC = () => {
   return (
     <>
+      <Header />
       <div className="container">
         <div className="intro">
           <h1 className="introHeader">
@@ -46,7 +54,7 @@ export default function Home() {
         <div className="mainHistory">
           <p>URL 변경 HISTORY</p>
           <ol>
-            {URL_HISTORY.map((list) => (
+            {URL_HISTORY.map((list: UrlHistoryItem) => (
               <li className="urlLists" key={list.id}>
                 {list.before} to {list.after}
               </li>
@@ -66,4 +74,5 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+export default Home;

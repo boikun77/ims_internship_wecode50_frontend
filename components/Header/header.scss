@@ -19,19 +19,36 @@
     padding: 0 10px;
 
     .logo {
-      width: 20%;
+      width: 10%;
     }
 
     .headerText {
       display: flex;
       align-items: center;
-      gap: 40px;
-      height: 100%;
+      gap: 20px;
       justify-content: center;
 
-      .propic {
-        width: 6%;
-        height: auto;
+      .signup {
+        border: none;
+        background-color: #ffffff;
+        font-size: 17px;
+        cursor: pointer;
+      }
+
+      .login {
+        margin-left: 10px;
+        font-size: 15px;
+        border: 1px solid transparent;
+        background-color: #2a5bd7;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 8px;
+        float: none;
+        line-height: 1.11;
+        &:hover {
+          background-color: rgb(61, 61, 228);
+          cursor: pointer;
+        }
       }
     }
   }
