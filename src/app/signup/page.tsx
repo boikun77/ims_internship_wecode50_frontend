@@ -48,7 +48,8 @@ const Signup: React.FC = () => {
     email.includes(".") &&
     password.length >= 10 &&
     password.length <= 20 &&
-    /[a-zA-Z]/.test(password) &&
+    /[a-z]/.test(password) &&
+    /[A-Z]/.test(password) &&
     /[0-9]/.test(password) &&
     /[^a-zA-Z0-9]/.test(password);
 
@@ -97,7 +98,7 @@ const Signup: React.FC = () => {
               <img alt="img" src="/img/check.png" />
               <p>
                 비밀번호는 최소 10자리 이상 20자리 이하, 그리고 최소 하나의
-                문자, 숫자, 특수기호를 포함해야 합니다.
+                소문자, 대문자, 숫자, 특수기호를 포함해야 합니다.
               </p>
             </div>
             <div className="checkLists">
