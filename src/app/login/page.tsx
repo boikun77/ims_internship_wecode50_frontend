@@ -1,7 +1,46 @@
+"use client";
+import React, { useState, ChangeEvent, FC } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import "./login.scss";
 import Header from "../../../components/Header/header";
 
-const Login: React.FC = () => {
+const Login: FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+  const handlePw = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const doLogin = () => {
+    fetch("http://192.168.1.67:8000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "Login success!") {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("email", data.email);
+          localStorage.setItem("nickname", data.nickname);
+          localStorage.setItem("password", data.password);
+          router.push("/");
+        } else {
+          alert("로그인에 실패했습니다 다시 시도해 주세요");
+        }
+      });
+  };
   return (
     <>
       <Header />
@@ -20,6 +59,7 @@ const Login: React.FC = () => {
             className="mainInput"
             type="text"
             placeholder="당신의 email 을 입력하세요"
+            onChange={handleEmail}
           />
 
           <p> 비밀번호 입력: </p>
@@ -27,12 +67,17 @@ const Login: React.FC = () => {
             className="mainInput"
             type="password"
             placeholder="당신의 비밀번호 를 입력하세요"
+            onChange={handlePw}
           />
 
-          <button>로그인</button>
+          <button onClick={doLogin}>로그인</button>
           <div className="loginBottom">
             <p className="bottomText">또는</p>
-            <button className="bottomButton">- 회원가입 -</button>
+            <Link href="/signup">
+              <button type="button" className="bottomButton">
+                - 회원가입 -
+              </button>
+            </Link>
           </div>
         </div>
       </div>

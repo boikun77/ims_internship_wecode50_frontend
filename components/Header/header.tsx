@@ -14,12 +14,9 @@ const Header: React.FC = () => {
 
     if (isLogoutConfirmed) {
       localStorage.removeItem("token");
-      localStorage.removeItem("adminToken");
-      localStorage.removeItem("id");
-      localStorage.removeItem("is_admin");
-      localStorage.removeItem("name");
-      localStorage.removeItem("userName");
-      localStorage.removeItem("profile_image");
+      localStorage.removeItem("email");
+      localStorage.removeItem("password");
+      localStorage.removeItem("nickname");
 
       router.push("/");
     }
