@@ -60,6 +60,20 @@
         }
       }
     }
+
+    .urlHistoryWrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+
+      .urlHistoryItem {
+        font-size: 18px;
+        line-height: 3;
+        font-weight: 600;
+      }
+    }
+
     .adjustInfo {
       margin-top: 20px;
       p {
