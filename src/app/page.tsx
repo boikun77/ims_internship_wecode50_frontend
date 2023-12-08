@@ -1,7 +1,11 @@
+"use client";
 import Image from "next/image";
+import { useState, useEffect, ChangeEvent } from "react";
 import "./main.scss";
 import { URL_HISTORY } from "/Users/boikun/Desktop/ims_internship_wecode50/src/app/data/index";
 import Header from "../../components/Header/header";
+import { useRouter } from "next/navigation";
+import { useQRCode } from "next-qrcode";
 
 interface UrlHistoryItem {
   id: number;
@@ -10,6 +14,74 @@ interface UrlHistoryItem {
 }
 
 const Home: React.FC = () => {
+  const [counter, setCounter] = useState(0);
+  const { SVG } = useQRCode();
+
+  const [originalUrl, setoriginalUrl] = useState("");
+  const [qrCodeImage, setQrCodeImage] = useState("");
+
+  const router = useRouter();
+  const result = localStorage.getItem("shortened_url") || "";
+  const points = localStorage.getItem("remainingpoints") || "";
+
+  const handleurl = (e: ChangeEvent<HTMLInputElement>) => {
+    setoriginalUrl(e.target.value);
+  };
+
+  const copyToClipboard = () => {
+    if (result) {
+      navigator.clipboard
+        .writeText(result)
+        .then(() => {
+          alert("주소가 클립보드에 복사되었습니다!");
+        })
+        .catch((err) => {
+          console.error("복사 실패: ", err);
+
+          alert("주소 복사에 실패했습니다.");
+        });
+    } else {
+      alert("결과가 없습니다.");
+    }
+  };
+
+  useEffect(() => {
+    const qrCode = localStorage.getItem("shortened_url");
+
+    if (qrCode) {
+      setQrCodeImage(qrCode);
+    }
+  }, [counter]);
+
+  const launch = () => {
+    fetch("http://192.168.1.29:8000/url", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        original_url: originalUrl,
+      }),
+    })
+      .then((res) => res.json())
+      .then((user) => {
+        if (user.message === "POST_SUCCESS") {
+          localStorage.setItem("id", user.url.id);
+          localStorage.setItem("original_url", user.url.original_url);
+          localStorage.setItem("shortened_url", user.url.shortened_url);
+          localStorage.setItem("created_at", user.url.created_at);
+          localStorage.setItem("remainingpoints", user.remainingPoints);
+        } else if (
+          user.message === "invalid token" ||
+          user.message === "Too many traffics"
+        ) {
+          alert("실패했습니다 다시 시도해 주세요");
+          router.push("/login");
+        }
+      });
+    setCounter((prevCounter) => prevCounter + 1);
+    console.log(counter);
+  };
   return (
     <>
       <Header />
@@ -33,8 +105,11 @@ const Home: React.FC = () => {
             className="mainInput"
             type="text"
             placeholder="당신의 URL 을 입력하세요"
+            onChange={handleurl}
           />
-          <button type="button">생성</button>
+          <button type="button" onClick={launch}>
+            생성
+          </button>
           <p> Output:</p>
           <div className="mainFomula">
             <p className="form1">ims.we</p>
@@ -42,12 +117,20 @@ const Home: React.FC = () => {
             <p className="form2">생성된 랜덤 난수 @</p>
           </div>
           <p>Result: </p>
-          <p className="mainResult">결과 : </p>
-          <p>QR 이미지 :</p>
-
+          <div className="resultline">
+            <p className="mainResult">
+              결과 : <p className="result">{result}</p>
+            </p>
+          </div>
+          <p>
+            QR 이미지 :
+            <div className="qrcode">
+              {qrCodeImage && <SVG text={qrCodeImage} />}
+            </div>
+          </p>
           <div>
-            <p>남은 횟수 : 10 </p>
-            <button>클립 보드에 주소 복사 </button>
+            <p>남은 횟수 : {points} </p>
+            <button onClick={copyToClipboard}>클립 보드에 주소 복사 </button>
           </div>
         </div>
 
@@ -67,8 +150,12 @@ const Home: React.FC = () => {
             횟수 제한 없이 URL 을 생성 하고 싶다면??
           </p>
           <div className="mainBottomButtons">
-            <button className="signup">회원가입 또는 </button>
-            <button className="login">로그인</button>
+            <button className="signup" onClick={() => router.push("/signup")}>
+              회원가입 또는{" "}
+            </button>
+            <button className="login" onClick={() => router.push("login")}>
+              로그인
+            </button>
           </div>
         </div>
       </div>
