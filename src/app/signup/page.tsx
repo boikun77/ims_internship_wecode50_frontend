@@ -21,7 +21,7 @@ const Signup: React.FC = () => {
   };
 
   const doFetch = () => {
-    fetch("http://192.168.1.67:8000/signup", {
+    fetch("http://192.168.1.182:8000/user/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
