@@ -18,7 +18,7 @@ const Login: FC = () => {
   };
 
   const doLogin = () => {
-    fetch("http://192.168.1.67:8000/login", {
+    fetch("http://192.168.1.182:8000/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -29,12 +29,13 @@ const Login: FC = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        if (data.message === "Login success!") {
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("email", data.email);
-          localStorage.setItem("nickname", data.nickname);
-          localStorage.setItem("password", data.password);
+      .then((user) => {
+        if (user.message === "Login success!") {
+          console.log(user);
+          localStorage.setItem("token", user.accessToken);
+          localStorage.setItem("email", user.email);
+          localStorage.setItem("nickname", user.nickname);
+          // localStorage.setItem("password", data.password);
           router.push("/");
         } else {
           alert("로그인에 실패했습니다 다시 시도해 주세요");
