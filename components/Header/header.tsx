@@ -13,11 +13,7 @@ const Header: React.FC = () => {
     const isLogoutConfirmed = window.confirm("로그아웃 하시겠습니까?");
 
     if (isLogoutConfirmed) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("email");
-      localStorage.removeItem("password");
-      localStorage.removeItem("nickname");
-
+      localStorage.clear();
       router.push("/");
     }
   };
@@ -37,15 +33,15 @@ const Header: React.FC = () => {
         <ul className="headerText">
           {isLoggedIn ? (
             <>
-              <li>
+              <li className="memberSection">
                 <p>{name} 님</p>
               </li>
-              <li>
+              <li className="memberSection">
                 <button className="link" onClick={handleLogout}>
                   로그아웃
                 </button>
               </li>
-              <li>
+              <li className="memberSection">
                 <button className="link" onClick={() => router.push("/mypage")}>
                   마이페이지
                 </button>

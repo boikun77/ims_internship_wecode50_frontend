@@ -18,7 +18,7 @@ const Login: FC = () => {
   };
 
   const doLogin = () => {
-    fetch("http://192.168.1.182:8000/user/login", {
+    fetch("http://192.168.1.111:8000/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -35,6 +35,7 @@ const Login: FC = () => {
           localStorage.setItem("token", user.accessToken);
           localStorage.setItem("email", user.email);
           localStorage.setItem("nickname", user.nickname);
+          localStorage.setItem("id", user.id);
           // localStorage.setItem("password", data.password);
           router.push("/");
         } else {
