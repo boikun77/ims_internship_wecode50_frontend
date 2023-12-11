@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useState, useEffect, ChangeEvent } from "react";
 import "./main.scss";
-import { URL_HISTORY } from "/Users/boikun/Desktop/ims_internship_wecode50/src/app/data/index";
 import Header from "../../components/Header/header";
 import { useRouter } from "next/navigation";
 import { useQRCode } from "next-qrcode";
@@ -54,7 +53,7 @@ const Home: React.FC = () => {
   }, [counter]);
 
   const launch = () => {
-    fetch("http://192.168.1.29:8000/url", {
+    fetch("http://192.168.1.111:8000/url", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -82,6 +81,39 @@ const Home: React.FC = () => {
     setCounter((prevCounter) => prevCounter + 1);
     console.log(counter);
   };
+
+  const getHistoryFromLocalStorage = (): UrlHistoryItem[] => {
+    const historyString = localStorage.getItem("urlHistory");
+    return historyString ? JSON.parse(historyString) : [];
+  };
+
+  // 로컬 스토리지에 히스토리를 저장하는 함수
+  const saveHistoryToLocalStorage = (history: UrlHistoryItem[]) => {
+    localStorage.setItem("urlHistory", JSON.stringify(history));
+  };
+
+  // 새 URL 히스토리를 업데이트하는 함수
+  const updateUrlHistory = (newItem: UrlHistoryItem) => {
+    const history = getHistoryFromLocalStorage();
+    history.unshift(newItem); // 새 항목을 맨 앞에 추가
+    const trimmedHistory = history.slice(0, 3); // 세 개의 아이템으로 제한
+    saveHistoryToLocalStorage(trimmedHistory); // 로컬 스토리지에 저장
+  };
+
+  useEffect(() => {
+    // QR 코드를 설정한 후 URL 히스토리를 업데이트
+    if (qrCodeImage) {
+      updateUrlHistory({
+        id: parseInt(localStorage.getItem("id") || "0"),
+        before: localStorage.getItem("original_url") || "",
+        after: localStorage.getItem("shortened_url") || "",
+      });
+    }
+  }, [qrCodeImage]);
+
+  // 렌더링을 위해 로컬 스토리지에서 URL 히스토리를 가져옴
+  const urlHistory = getHistoryFromLocalStorage();
+
   return (
     <>
       <Header />
@@ -137,9 +169,9 @@ const Home: React.FC = () => {
         <div className="mainHistory">
           <p>URL 변경 HISTORY</p>
           <ol>
-            {URL_HISTORY.map((list: UrlHistoryItem) => (
-              <li className="urlLists" key={list.id}>
-                {list.before} to {list.after}
+            {urlHistory.map((item: UrlHistoryItem, index: number) => (
+              <li className="urlLists" key={index}>
+                {item.before}에서 {item.after}로 변경됨
               </li>
             ))}
           </ol>
