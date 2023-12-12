@@ -6,6 +6,10 @@
 
   .link {
     cursor: pointer;
+    border: none;
+    background-color: #ffffff;
+    font-size: 15px;
+    cursor: pointer;
   }
 
   .wrapper {
@@ -20,6 +24,7 @@
 
     .logo {
       width: 10%;
+      cursor: pointer;
     }
 
     .headerText {
@@ -27,6 +32,10 @@
       align-items: center;
       gap: 20px;
       justify-content: center;
+
+      .memberSection {
+        margin-right: 30px;
+      }
 
       .signup {
         border: none;

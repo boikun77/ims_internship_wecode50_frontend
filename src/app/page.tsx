@@ -22,6 +22,7 @@ const Home: React.FC = () => {
   const router = useRouter();
   const result = localStorage.getItem("shortened_url") || "";
   const points = localStorage.getItem("remainingpoints") || "";
+  const token = localStorage.getItem("token") || "";
 
   const handleurl = (e: ChangeEvent<HTMLInputElement>) => {
     setoriginalUrl(e.target.value);
@@ -57,6 +58,7 @@ const Home: React.FC = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         original_url: originalUrl,
@@ -65,7 +67,6 @@ const Home: React.FC = () => {
       .then((res) => res.json())
       .then((user) => {
         if (user.message === "POST_SUCCESS") {
-          localStorage.setItem("id", user.url.id);
           localStorage.setItem("original_url", user.url.original_url);
           localStorage.setItem("shortened_url", user.url.shortened_url);
           localStorage.setItem("created_at", user.url.created_at);
