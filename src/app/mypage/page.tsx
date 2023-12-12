@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import "./mypage.scss";
 import Header from "../../../components/Header/header";
 import { useRouter } from "next/navigation";
@@ -80,8 +80,8 @@ const Mypage: React.FC = () => {
     const isQuitConfirmed = window.confirm("정말로 탈퇴 하시겠습니까?");
 
     if (isQuitConfirmed) {
-      fetch(`http://192.168.1.111:8000/user/update/${id}`, {
-        method: "POST",
+      fetch(`http://192.168.1.111:8000/user/delete/${id}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
           Authorization: `Bearer ${token}`,
@@ -101,18 +101,31 @@ const Mypage: React.FC = () => {
     }
   };
 
-  const history = () => {
-    fetch(`http://192.168.1.111:8000/user/update/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setUrlRecord(data.url);
-      });
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://192.168.1.111:8000/url`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUrlRecord(data.urls);
+          console.log(data);
+        } else {
+          throw new Error("Network response was not ok.");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -143,11 +156,12 @@ const Mypage: React.FC = () => {
 
           {showUrlHistory && (
             <div className="urlHistoryWrapper">
-              {urlRecord.map((record: UrlHistoryItem) => (
-                <ol className="urlHistoryItem" key={record.id}>
-                  <li> Before: {record.before} </li>
-                  <li> After: {record.after} </li>
-                </ol>
+              {urlRecord.map((record) => (
+                <div className="urlHistoryItem" key={record.id}>
+                  <p>변경 전 : {record.original_url}</p>
+                  <p>변경 후: {record.shortened_url}</p>
+                  <p>일시 : {record.created_at}</p>
+                </div>
               ))}
             </div>
           )}
