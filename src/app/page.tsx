@@ -13,7 +13,7 @@ interface UrlHistoryItem {
 }
 
 const Home: React.FC = () => {
-  const [counter, setCounter] = useState(0);
+  // const [counter, setCounter] = useState(0);
   const { SVG } = useQRCode();
 
   const [originalUrl, setoriginalUrl] = useState("");
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
   const router = useRouter();
   const result = localStorage.getItem("shortened_url") || "";
   const points = localStorage.getItem("remainingpoints") || "";
-  const token = localStorage.getItem("token") || "";
+  const [Result, setResult] = useState<string>("");
 
   const handleurl = (e: ChangeEvent<HTMLInputElement>) => {
     setoriginalUrl(e.target.value);
@@ -46,20 +46,29 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    const qrCode = localStorage.getItem("shortened_url");
+    const qrCode =
+      "http://192.168.1.111:8000/" + localStorage.getItem("shortened_url");
 
     if (qrCode) {
       setQrCodeImage(qrCode);
     }
-  }, [counter]);
+  }, [Result]);
 
   const launch = () => {
+    const token = localStorage.getItem("token"); // localStorage에서 토큰 가져오기
+
+    const headers: { [key: string]: string } = {
+      "Content-Type": "application/json;charset=utf-8",
+    };
+
+    // 토큰이 존재하는 경우, 헤더에 추가
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
     fetch("http://192.168.1.111:8000/url", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-        Authorization: `Bearer ${token}`,
-      },
+      headers: headers,
       body: JSON.stringify({
         original_url: originalUrl,
       }),
@@ -71,16 +80,15 @@ const Home: React.FC = () => {
           localStorage.setItem("shortened_url", user.url.shortened_url);
           localStorage.setItem("created_at", user.url.created_at);
           localStorage.setItem("remainingpoints", user.remainingPoints);
+          setResult(user.url.shortened_url || "");
         } else if (
           user.message === "invalid token" ||
           user.message === "Too many traffics"
         ) {
           alert("실패했습니다 다시 시도해 주세요");
-          router.push("/login");
+          router.push("/");
         }
       });
-    setCounter((prevCounter) => prevCounter + 1);
-    console.log(counter);
   };
 
   const getHistoryFromLocalStorage = (): UrlHistoryItem[] => {
@@ -97,7 +105,7 @@ const Home: React.FC = () => {
   const updateUrlHistory = (newItem: UrlHistoryItem) => {
     const history = getHistoryFromLocalStorage();
     history.unshift(newItem); // 새 항목을 맨 앞에 추가
-    const trimmedHistory = history.slice(0, 3); // 세 개의 아이템으로 제한
+    const trimmedHistory = history.slice(0, 5); // 세 개의 아이템으로 제한
     saveHistoryToLocalStorage(trimmedHistory); // 로컬 스토리지에 저장
   };
 
@@ -160,6 +168,9 @@ const Home: React.FC = () => {
             <div className="qrcode">
               {qrCodeImage && <SVG text={qrCodeImage} />}
             </div>
+          </p>
+          <p className="notice">
+            QR 코드는 한번만 생성되니 이미지를 저장해주시기 바랍니다.
           </p>
           <div>
             <p>남은 횟수 : {points} </p>
