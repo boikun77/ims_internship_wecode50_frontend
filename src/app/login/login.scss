@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "omni";
+  src: url("/font/210 옴니고딕OTF 035.otf"), format("opentype");
+}
 .loginContainer {
   padding: 50px;
   background-color: #f5f6f7;
@@ -9,7 +13,7 @@
       display: flex;
       justify-content: center;
       gap: 12px;
-      font-family: "cookie";
+      font-family: "omni";
 
       .introHeaderSpan {
         color: #2a5bd7;
@@ -33,8 +37,7 @@
       font-size: 20px;
       font-weight: 500;
       line-height: 22px;
-      font-family: "ProximaNova Bold", "Helvetica Neue", Helvetica, Arial,
-        sans-serif;
+      font-family: "omni";
     }
     input {
       border: 2px solid #d3d4d7;
@@ -46,12 +49,12 @@
       margin-top: 8px;
       margin-bottom: 0;
       box-shadow: none;
-      font-family: "ProximaNova Regular", "Helvetica Neue", Helvetica, Arial,
-        sans-serif;
+      font-family: "omni";
       display: block;
     }
 
     button {
+      font-family: "omni";
       width: 100%;
       margin-top: 50px;
       border: 1px solid transparent;
@@ -69,18 +72,21 @@
     }
     .loginBottom {
       .bottomText {
+        font-family: "omni";
         font-size: 15px;
         text-align: center;
       }
       .bottomButton {
+        font-family: "omni";
         display: flex;
         justify-content: center;
         margin: auto;
-        width: 22%;
+        width: 30%;
         border: none;
         background-color: rgb(255, 255, 255);
         color: black;
         font-size: 16px;
+        text-underline-position: under;
       }
     }
   }
