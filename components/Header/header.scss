@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "omniThin";
+  src: url("/font/210 옴니고딕OTF 025.otf"), format("opentype");
+}
 .nav {
   display: flex;
   width: 100%;
@@ -10,6 +14,7 @@
     background-color: #ffffff;
     font-size: 15px;
     cursor: pointer;
+    font-family: "omniThin";
   }
 
   .wrapper {
@@ -32,12 +37,14 @@
       align-items: center;
       gap: 20px;
       justify-content: center;
+      font-family: "omniThin";
 
       .memberSection {
         margin-right: 30px;
       }
 
       .signup {
+        font-family: "omniThin";
         border: none;
         background-color: #ffffff;
         font-size: 17px;
@@ -45,6 +52,7 @@
       }
 
       .login {
+        font-family: "omniThin";
         margin-left: 10px;
         font-size: 15px;
         border: 1px solid transparent;

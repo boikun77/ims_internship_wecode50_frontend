@@ -56,7 +56,7 @@ const Mypage: React.FC = () => {
   };
 
   const change = () => {
-    fetch(`http://192.168.1.111:8000/user/update/${id}`, {
+    fetch(`http://192.168.1.78:8000/user/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -80,7 +80,7 @@ const Mypage: React.FC = () => {
     const isQuitConfirmed = window.confirm("정말로 탈퇴 하시겠습니까?");
 
     if (isQuitConfirmed) {
-      fetch(`http://192.168.1.111:8000/user/delete/${id}`, {
+      fetch(`http://192.168.1.78:8000/user/delete/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -104,7 +104,7 @@ const Mypage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://192.168.1.111:8000/url`, {
+        const response = await fetch(`http://192.168.1.78:8000/url`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json;charset=utf-8",

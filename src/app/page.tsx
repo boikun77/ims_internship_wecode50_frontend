@@ -47,7 +47,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const qrCode =
-      "http://192.168.1.111:8000/" + localStorage.getItem("shortened_url");
+      "http://192.168.1.78:8000/" + localStorage.getItem("shortened_url");
 
     if (qrCode) {
       setQrCodeImage(qrCode);
@@ -66,7 +66,7 @@ const Home: React.FC = () => {
       headers["Authorization"] = `Bearer ${token}`;
     }
 
-    fetch("http://192.168.1.111:8000/url", {
+    fetch("http://192.168.1.78:8000/url", {
       method: "POST",
       headers: headers,
       body: JSON.stringify({
@@ -158,7 +158,7 @@ const Home: React.FC = () => {
             <p className="form2">생성된 랜덤 난수 @</p>
           </div>
           <p>Result: </p>
-          <div className="resultline">
+          <div className="resultLine">
             <p className="mainResult">
               결과 : <p className="result">{result}</p>
             </p>
@@ -174,7 +174,9 @@ const Home: React.FC = () => {
           </p>
           <div>
             <p>남은 횟수 : {points} </p>
-            <button onClick={copyToClipboard}>클립 보드에 주소 복사 </button>
+            <button className="clipBoard" onClick={copyToClipboard}>
+              클립 보드에 주소 복사{" "}
+            </button>
           </div>
         </div>
 
