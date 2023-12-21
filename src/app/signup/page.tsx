@@ -21,7 +21,7 @@ const Signup: React.FC = () => {
   };
 
   const doFetch = () => {
-    fetch("http://192.168.1.111:8000/user/signup", {
+    fetch("https://relative-ray-national.ngrok-free.app/user/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",

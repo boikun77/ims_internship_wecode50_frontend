@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, useRef } from "react";
 import "./main.scss";
 import Header from "../../components/Header/header";
 import { useRouter } from "next/navigation";
@@ -47,7 +47,8 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const qrCode =
-      "http://192.168.1.78:8000/" + localStorage.getItem("shortened_url");
+      "https://relative-ray-national.ngrok-free.app/" +
+      localStorage.getItem("shortened_url");
 
     if (qrCode) {
       setQrCodeImage(qrCode);
@@ -61,12 +62,15 @@ const Home: React.FC = () => {
       "Content-Type": "application/json;charset=utf-8",
     };
 
+    const newRandomString = generateRandomString(10);
+    setAnimateMatrix(true);
+
     // 토큰이 존재하는 경우, 헤더에 추가
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
 
-    fetch("http://192.168.1.78:8000/url", {
+    fetch("https://relative-ray-national.ngrok-free.app/url", {
       method: "POST",
       headers: headers,
       body: JSON.stringify({
@@ -123,6 +127,51 @@ const Home: React.FC = () => {
   // 렌더링을 위해 로컬 스토리지에서 URL 히스토리를 가져옴
   const urlHistory = getHistoryFromLocalStorage();
 
+  const historyRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("slideIn");
+        } else {
+          entry.target.classList.remove("slideIn");
+        }
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      }
+    );
+
+    if (historyRef.current) {
+      observer.observe(historyRef.current);
+    }
+
+    return () => {
+      if (historyRef.current) {
+        observer.unobserve(historyRef.current);
+      }
+    };
+  }, []);
+  const random = result.startsWith("ims.we")
+    ? result.substring("ims.we".length)
+    : result;
+
+  const [animateMatrix, setAnimateMatrix] = useState(false);
+
+  const generateRandomString = (length) => {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+
   return (
     <>
       <Header />
@@ -155,17 +204,25 @@ const Home: React.FC = () => {
           <div className="mainFomula">
             <p className="form1">ims.we</p>
             <p className="form1">+</p>
-            <p className="form2">생성된 랜덤 난수 @</p>
+            <p
+              className={`form2 ${animateMatrix ? "matrix-animation" : ""}`}
+              key={result}
+            >
+              <p className="randomString"> {random} </p>
+            </p>
           </div>
           <p>Result: </p>
           <div className="resultLine">
-            <p className="mainResult">
+            <p
+              className={`mainResult ${result ? "resultBoxAnimation" : ""}`}
+              key={result}
+            >
               결과 : <p className="result">{result}</p>
             </p>
           </div>
           <p>
             QR 이미지 :
-            <div className="qrcode">
+            <div className="qrcode fadeIn" key={qrCodeImage}>
               {qrCodeImage && <SVG text={qrCodeImage} />}
             </div>
           </p>
@@ -180,7 +237,7 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <div className="mainHistory">
+        <div className="mainHistory" ref={historyRef}>
           <p>URL 변경 HISTORY</p>
           <ol>
             {urlHistory.map((item: UrlHistoryItem, index: number) => (
