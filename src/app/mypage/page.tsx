@@ -3,8 +3,6 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import "./mypage.scss";
 import Header from "../../../components/Header/header";
 import { useRouter } from "next/navigation";
-import { USER_INFO } from "/Users/boikun/Desktop/ims_internship_wecode50/src/app/data/userinfo";
-import { URL_HISTORY } from "/Users/boikun/Desktop/ims_internship_wecode50/src/app/data/index";
 
 interface UserInfo {
   id: number;
@@ -87,7 +85,7 @@ const Mypage: React.FC = () => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          id: id,
+          // id: id,
         }),
       })
         .then((res) => res.json())
@@ -160,10 +158,10 @@ const Mypage: React.FC = () => {
           {showUrlHistory && (
             <div className="urlHistoryWrapper">
               {urlRecord.map((record) => (
-                <div className="urlHistoryItem" key={record.id}>
-                  <p>변경 전 : {record.original_url}</p>
-                  <p>변경 후: {record.shortened_url}</p>
-                  <p>일시 : {record.created_at}</p>
+                <div className="urlHistoryItem" key={record["id"]}>
+                  <p>변경 전 : {record["original_url"]}</p>
+                  <p>변경 후: {record["shortened_url"]}</p>
+                  <p>일시 : {record["created_at"]}</p>
                 </div>
               ))}
             </div>

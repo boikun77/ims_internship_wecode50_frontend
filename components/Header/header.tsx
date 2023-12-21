@@ -25,7 +25,7 @@ const Header: React.FC = () => {
           <img
             className="logo"
             alt="logoimg"
-            src="/img/gitcat.png"
+            src="/img/shortendUrlLogo-removebg.png"
             onClick={() => router.push("/")}
           />
         </div>
@@ -34,7 +34,9 @@ const Header: React.FC = () => {
           {isLoggedIn ? (
             <>
               <li className="memberSection">
-                <p>{name} 님</p>
+                <p>
+                  <span className="userNickname">{name}</span> 님!
+                </p>
               </li>
               <li className="memberSection">
                 <button className="link" onClick={handleLogout}>
