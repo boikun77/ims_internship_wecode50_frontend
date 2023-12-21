@@ -62,8 +62,8 @@ const Home: React.FC = () => {
       "Content-Type": "application/json;charset=utf-8",
     };
 
-    const newRandomString = generateRandomString(10);
-    setAnimateMatrix(true);
+    // const newRandomString = generateRandomString(10);
+    // setAnimateMatrix(true);
 
     // 토큰이 존재하는 경우, 헤더에 추가
     if (token) {

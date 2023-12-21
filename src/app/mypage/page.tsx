@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, ChangeEvent, useEffect } from "react";
 import "./mypage.scss";
 import Header from "../../../components/Header/header";
@@ -42,6 +43,7 @@ const Mypage: React.FC = () => {
   const email = localStorage.getItem("email") || "";
   const id = localStorage.getItem("id") || "";
   const token = localStorage.getItem("token") || "";
+
   const [newNickname, setNewnickname] = useState("");
   const [newPassword, setNewpassword] = useState("");
   const [urlRecord, setUrlRecord] = useState([]);
