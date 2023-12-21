@@ -1,14 +1,23 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import "./header.scss";
 
 const Header: React.FC = () => {
   const router = useRouter();
-  const isLoggedIn = !!localStorage.getItem("token");
-  const name = localStorage.getItem("nickname") || "";
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [name, setName] = useState("");
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      const nickname = localStorage.getItem("nickname") || "";
+
+      setIsLoggedIn(!!token);
+      setName(nickname);
+    }
+  }, []);
   const handleLogout = () => {
     const isLogoutConfirmed = window.confirm("로그아웃 하시겠습니까?");
 
@@ -25,7 +34,7 @@ const Header: React.FC = () => {
           <img
             className="logo"
             alt="logoimg"
-            src="/img/gitcat.png"
+            src="/img/shortendUrlLogo-removebg.png"
             onClick={() => router.push("/")}
           />
         </div>

@@ -209,15 +209,20 @@
       justify-content: center;
 
       .form1 {
+        display: flex;
+        width: 100%;
+        font-size: 20px;
         margin-top: 30px;
         margin-left: 15px;
+        margin-right: 10px;
         color: #2a5bd7;
       }
       .form2 {
+        margin-left: -280px;
         display: flex;
         color: gray;
         background-color: #ffffff;
-        width: 90%;
+        width: 100%;
         border: 1px solid #d3d4d7;
         border-radius: 8px;
         padding: 23px 20px;

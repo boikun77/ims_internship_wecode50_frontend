@@ -28,11 +28,12 @@
     padding: 0 10px;
 
     .logo {
-      width: 10%;
+      width: 25%;
       cursor: pointer;
     }
 
     .headerText {
+      width: 50%;
       display: flex;
       align-items: center;
       gap: 20px;
@@ -41,6 +42,11 @@
 
       .memberSection {
         margin-right: 30px;
+        font-size: 15px;
+        margin-right: 20px;
+        .userNickname {
+          color: blue;
+        }
       }
 
       .signup {

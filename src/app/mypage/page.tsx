@@ -19,11 +19,41 @@ interface UrlHistoryItem {
   after: string;
 }
 
+interface UrlRecord {
+  id: number;
+  original_url: string;
+  shortened_url: string;
+  created_at: string; // 또는 날짜/시간 형식에 맞는 타입으로 변경
+}
+
 const Mypage: React.FC = () => {
   const router = useRouter();
   const [showAdjustInfo, setShowAdjustInfo] = useState(false);
   const [showUrlHistory, setShowUrlHistory] = useState(false);
   const [showUserInfo, setShowUserInfo] = useState(true);
+  const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [id, setId] = useState("");
+  const [token, setToken] = useState("");
+
+  // 기타 상태 변수...
+
+  useEffect(() => {
+    // 클라이언트 사이드에서만 localStorage를 사용하도록 조건문 추가
+    if (typeof window !== "undefined") {
+      const storedEmail = localStorage.getItem("email") || "";
+      const storedNickname = localStorage.getItem("nickname") || "";
+      const storedId = localStorage.getItem("id") || "";
+      const storedToken = localStorage.getItem("token") || "";
+
+      setEmail(storedEmail);
+      setNickname(storedNickname);
+      setId(storedId);
+      setToken(storedToken);
+    }
+
+    // 기타 작업 수행...
+  }, []);
 
   const handleButtonClick = () => {
     setShowAdjustInfo(!showAdjustInfo);
@@ -40,13 +70,9 @@ const Mypage: React.FC = () => {
     setShowAdjustInfo(false);
   };
 
-  const nickname = localStorage.getItem("nickname") || "";
-  const email = localStorage.getItem("email") || "";
-  const id = localStorage.getItem("id") || "";
-  const token = localStorage.getItem("token") || "";
   const [newNickname, setNewnickname] = useState("");
   const [newPassword, setNewpassword] = useState("");
-  const [urlRecord, setUrlRecord] = useState([]);
+  const [urlRecord, setUrlRecord] = useState<UrlRecord[]>([]);
 
   const changeNickname = (e: ChangeEvent<HTMLInputElement>) => {
     setNewnickname(e.target.value);

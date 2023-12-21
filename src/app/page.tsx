@@ -155,13 +155,15 @@ const Home: React.FC = () => {
       }
     };
   }, []);
-  const random = result.startsWith("ims.we")
-    ? result.substring("ims.we".length)
+  const random = result.startsWith(
+    "https://relative-ray-national.ngrok-free.app/"
+  )
+    ? result.substring("https://relative-ray-national.ngrok-free.app/".length)
     : result;
 
   const [animateMatrix, setAnimateMatrix] = useState(false);
 
-  const generateRandomString = (length) => {
+  const generateRandomString = (length: number) => {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
@@ -202,8 +204,7 @@ const Home: React.FC = () => {
           </button>
           <p> Output:</p>
           <div className="mainFomula">
-            <p className="form1">ims.we</p>
-            <p className="form1">+</p>
+            <p className="form1">https://ngrok-free.app/ &nbsp; &nbsp; +</p>
             <p
               className={`form2 ${animateMatrix ? "matrix-animation" : ""}`}
               key={result}
