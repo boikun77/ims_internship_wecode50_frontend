@@ -54,6 +54,7 @@ const Mypage: React.FC = () => {
 
     // 기타 작업 수행...
   }, []);
+  console.log(token, id, email, nickname);
 
   const handleButtonClick = () => {
     setShowAdjustInfo(!showAdjustInfo);
@@ -131,11 +132,12 @@ const Mypage: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `https://relative-ray-national.ngrok-free.app/url`,
+          "https://relative-ray-national.ngrok-free.app/url",
           {
             method: "GET",
             headers: {
               "Content-Type": "application/json;charset=utf-8",
+              "ngrok-skip-browser-warning": "69420",
               Authorization: `Bearer ${token}`,
             },
           }
