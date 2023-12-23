@@ -24,6 +24,7 @@ const Header: React.FC = () => {
     if (isLogoutConfirmed) {
       localStorage.clear();
       router.push("/");
+      window.location.reload(true);
     }
   };
 
