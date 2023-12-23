@@ -38,22 +38,6 @@ const Mypage: React.FC = () => {
 
   // 기타 상태 변수...
 
-  useEffect(() => {
-    // 클라이언트 사이드에서만 localStorage를 사용하도록 조건문 추가
-    if (typeof window !== "undefined") {
-      const storedEmail = localStorage.getItem("email") || "";
-      const storedNickname = localStorage.getItem("nickname") || "";
-      const storedId = localStorage.getItem("id") || "";
-      const storedToken = localStorage.getItem("token") || "";
-
-      setEmail(storedEmail);
-      setNickname(storedNickname);
-      setId(storedId);
-      setToken(storedToken);
-    }
-
-    // 기타 작업 수행...
-  }, []);
   console.log(token, id, email, nickname);
 
   const handleButtonClick = () => {
@@ -129,6 +113,25 @@ const Mypage: React.FC = () => {
   };
 
   useEffect(() => {
+    // 클라이언트 사이드에서만 localStorage를 사용하도록 조건문 추가
+    if (typeof window !== "undefined") {
+      const storedEmail = localStorage.getItem("email") || "";
+      const storedNickname = localStorage.getItem("nickname") || "";
+      const storedId = localStorage.getItem("id") || "";
+      const storedToken = localStorage.getItem("token") || "";
+
+      setEmail(storedEmail);
+      setNickname(storedNickname);
+      setId(storedId);
+      setToken(storedToken);
+    }
+
+    // 기타 작업 수행...
+  }, []);
+
+  useEffect(() => {
+    if (!token) return;
+
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -156,7 +159,7 @@ const Mypage: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [token]);
 
   return (
     <>
